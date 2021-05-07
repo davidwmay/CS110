@@ -2,6 +2,9 @@
 const url = "http://ec2-54-219-224-129.us-west-1.compute.amazonaws.com:2000/feed/random?q=weather"
 let tweetContainer;
 let tweet_list = [];
+let search;
+let searchTerm = "";
+
 
 function fetchTweets() {
     if (!(document.getElementById("pause").checked)) {
@@ -24,7 +27,7 @@ function fetchTweets() {
             tweetInfo.push(data.statuses[i].user.name);
             tweetInfo.push(data.statuses[i].user.profile_image_url_https);
             tweet_list.push(tweetInfo);
-            console.log(tweet_list)
+            // console.log(tweet_list)
         }
         refreshTweets(tweet_list);
         })
@@ -32,31 +35,23 @@ function fetchTweets() {
             // error catching
         console.log(err) }) 
     }
-
-    // for (tweetInfo in tweet_List) {
-    //     console.log(tweetInfo[1]);
-    //     document.getElementById("tweet_text").innerHTML = tweetInfo[1];
-    // }
 }
-
-// let searchString = "" // here we use a global variable
-
-// const handleSearch = event => {
-//     searchString = event.target.value.trim().toLowerCase()
-//     // you may want to update the displayed HTML here too
-
-// }
-// document.getElementById("searchBar").addEventListener("input", handleSearch)
-
 
 
 function getTweets() {
     tweetContainer = document.getElementById('tweet-container');
+    search = document.getElementById('searchBar').addEventListener("input", handleSearch);
+    // console.log(search);
     fetchTweets();
     var intervalID = setInterval(fetchTweets, 5000);
 }
 
-
+const handleSearch = event => {
+    searchString = event.target.value.trim().toLowerCase()
+    searchTerm = searchString;
+    // you may want to update the displayed HTML here too
+    // console.log(searchString);
+}
 
 /**
  * Removes all existing tweets from tweetList and then append all tweets back in
@@ -65,7 +60,7 @@ function getTweets() {
  * @returns None, the tweets will be renewed
  */
 function refreshTweets(tweets) {
-    console.log(tweets);
+    // console.log(tweets);
     // feel free to use a more complicated heuristics like in-place-patch, for simplicity, we will clear all tweets and append all tweets back
     // {@link https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript}
     while (tweetContainer.firstChild) {
@@ -75,7 +70,7 @@ function refreshTweets(tweets) {
     // create an unordered list to hold the tweets
     // {@link https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement}
     const tweetList = document.createElement("ul");
-    console.log(tweetList);
+    // console.log(tweetList);
     // append the tweetList to the tweetContainer
     // {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild}
     tweetContainer.appendChild(tweetList);
@@ -84,15 +79,18 @@ function refreshTweets(tweets) {
 
     // filter on search text
     // {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter}
-    // const filteredResult = tweets.filter();
+    // const filteredResult = tweets.filter(filterResult);
     // sort by date
     // {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort}
-    console.log(tweets);
+    // console.log(tweets);
     const sortedResult = tweets.sort();
 
     // execute the arrow function for each tweet
     // {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach}
     sortedResult.forEach(tweetObject => {
+        if (searchTerm != "" && !tweetObject[1].includes(searchTerm)) {
+            return;
+        }
         // // create a container for individual tweet
         const tweet = document.createElement("li");
 
@@ -110,4 +108,5 @@ function refreshTweets(tweets) {
         // // finally append your tweet into the tweet list
         tweetList.appendChild(tweet);
     });
+    // console.log(searchTerm);
 }

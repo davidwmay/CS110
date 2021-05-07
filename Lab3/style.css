@@ -1,5 +1,17 @@
+#searchBar {
+    margin-top: 20px;
+    margin-left: 20px;
+}
 
+#pause {
+    margin-left: 20px;
+}
 
 .headerelement {
     float: left;
+    margin-bottom: 20px;
+}
+
+.tweet-container {
+    margin-top: 100px;
 }
