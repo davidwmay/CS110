@@ -99,7 +99,13 @@ function refreshTweets(tweets) {
         // // create a text node "safely" with HTML characters escaped
         // // {@link https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode}
         const tweetText = document.createTextNode(tweetObject[1]);
+        // FIXME: can't output newline
+        const tweetName = document.createTextNode(tweetObject[3] + "\n");
+        let profilePic = document.createElement("img");
+        profilePic.src = tweetObject[4]
         // // append the text node to the div
+        tweetContent.appendChild(tweetName);
+        tweetContent.appendChild(profilePic);
         tweetContent.appendChild(tweetText);
 
         // // you may want to put more stuff here like time, username...
