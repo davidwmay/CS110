@@ -47,8 +47,13 @@ function getTweets() {
 }
 
 const handleSearch = event => {
+    if (typeof searchTerm == 'undefined') {
+        return;
+    }
+    console.log("In handlesearch");
     searchString = event.target.value.trim().toLowerCase()
     searchTerm = searchString;
+    refreshTweets(tweet_list);
     // you may want to update the displayed HTML here too
     // console.log(searchString);
 }
