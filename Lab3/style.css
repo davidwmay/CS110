@@ -1,17 +1,8 @@
 #searchBar {
     margin-top: 20px;
-    margin-left: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
-
-/* #pause {
-    float: right;
-    margin-bottom: 20px;
-}
-
-#pause_button {
-    float: right;
-    font-size: 100%;
-} */
 
 .pause_format {
     margin-top: 20px;
@@ -19,15 +10,11 @@
     color:white
 }
 
-.headerelement {
-    float: left;
-    margin-bottom: 20px;
-}
-
 .header {
-    display:inline-block;
+    /* display:inline-block; */
     margin-left: auto;
     margin-right: auto;
+    float:right
 }
 
 .tweet-container {
@@ -49,9 +36,35 @@
 
 body {
     /* background-color: #1da1f2; */
-    background-color: #15181c;
+    background-color: black;
+    display:flex;
 }
 
 #profile_pic {
     border-radius: 50%;
 }
+
+.middle{
+    width: 580px;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .right{
+    width: 290px;
+    height: 200px;
+    float:right;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .left{
+    width: 290px;
+    height: 200px;
+    float:left;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
