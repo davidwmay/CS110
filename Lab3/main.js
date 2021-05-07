@@ -23,7 +23,7 @@ function fetchTweets() {
             var tweetInfo = [];
             tweetInfo.push(data.statuses[i].id);
             tweetInfo.push(data.statuses[i].text);
-            tweetInfo.push(data.statuses[i].created_at);
+            tweetInfo.push(data.statuses[i].created_at.substring(0, 10));
             tweetInfo.push(data.statuses[i].user.name);
             tweetInfo.push(data.statuses[i].user.profile_image_url_https);
             tweet_list.push(tweetInfo);
@@ -108,6 +108,7 @@ function refreshTweets(tweets) {
         const tweetName = document.createTextNode(tweetObject[3] + "\n");
         let profilePic = document.createElement("img");
         profilePic.src = tweetObject[4]
+        console.log(tweetObject[2]);
         // // append the text node to the div
         tweetContent.appendChild(tweetName);
         tweetContent.appendChild(profilePic);
