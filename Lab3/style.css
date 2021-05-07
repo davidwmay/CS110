@@ -3,8 +3,20 @@
     margin-left: 20px;
 }
 
-#pause {
-    margin-left: 20px;
+/* #pause {
+    float: right;
+    margin-bottom: 20px;
+}
+
+#pause_button {
+    float: right;
+    font-size: 100%;
+} */
+
+.pause_format {
+    margin-top: 20px;
+    float: right;
+    color:white
 }
 
 .headerelement {
@@ -12,6 +24,34 @@
     margin-bottom: 20px;
 }
 
+.header {
+    display:inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .tweet-container {
     margin-top: 100px;
+}
+
+#tweet-block {
+    margin-bottom: 20px;
+}
+
+#tweet {
+    list-style-type: none;
+    background-color:#15181c;
+    color:white;
+    border-style: solid;
+    border-color: #54575a;
+    border-width: 1px;
+}
+
+body {
+    /* background-color: #1da1f2; */
+    background-color: #15181c;
+}
+
+#profile_pic {
+    border-radius: 50%;
 }

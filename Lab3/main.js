@@ -98,6 +98,7 @@ function refreshTweets(tweets) {
         }
         // // create a container for individual tweet
         const tweet = document.createElement("li");
+        tweet.setAttribute('id','tweet');
 
         // // e.g. create a div holding tweet content
         const tweetContent = document.createElement("div");
@@ -105,14 +106,23 @@ function refreshTweets(tweets) {
         // // {@link https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode}
         const tweetText = document.createTextNode(tweetObject[1]);
         // FIXME: can't output newline
-        const tweetName = document.createTextNode(tweetObject[3] + "\n");
+        const tweetName = document.createTextNode(tweetObject[3]);
         let profilePic = document.createElement("img");
-        profilePic.src = tweetObject[4]
-        console.log(tweetObject[2]);
+        let timestamp = document.createTextNode(tweetObject[2]);
+        var br = document.createElement("br");
+        var whitespace = document.createTextNode(" ");
+        profilePic.src = tweetObject[4];
+
+        profilePic.setAttribute('id', 'profile_pic');
         // // append the text node to the div
-        tweetContent.appendChild(tweetName);
         tweetContent.appendChild(profilePic);
+        tweetContent.appendChild(tweetName);
+        tweetContent.appendChild(whitespace);
+        tweetContent.appendChild(timestamp);
+        tweetContent.appendChild(br);
         tweetContent.appendChild(tweetText);
+
+        tweetContent.setAttribute('id','tweet-block');
 
         // // you may want to put more stuff here like time, username...
         tweet.appendChild(tweetContent);
