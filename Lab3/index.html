@@ -3,25 +3,33 @@
   <head>
     <meta charset="utf-8">
     <title>Twitter</title>
-    
+    <link rel="shortcut icon" type="image/jpg" href="images/twitter-logo.png"/>
     <link rel="stylesheet" href="style.css" />
     <script src="main.js"></script>
   </head>
   <body onload="getTweets();">
 
+    <div class="left">
+      <img src="images/leftimg.PNG" alt="leftsideimage">
+    </div>
+
+    <div class="middle">
+      <div id="tweet-container"></div>
+    </div>
+
+    <div class="right">
+      <img src="images/sideimg.PNG" alt="rightsideimage">
+    </div>
 
     <div class="header">
-        <!-- <h1 class="headerelement">Tweets will show up below here!</h1> -->
-        <input class="searchBar" id="searchBar" type="search" placeholder="Search Twitter">
+      <!-- <h1 class="headerelement">Tweets will show up below here!</h1> -->
+      <input class="searchBar" id="searchBar" type="search" placeholder="Search Twitter">
 
-      <div class="pause_format">
-        <input type="checkbox" id="pause" name="pause_button" value="pause">
-        <label id="pause_button"> Pause </label>
-      </div>
+    <div class="pause_format">
+      <input type="checkbox" id="pause" name="pause_button" value="pause">
+      <label id="pause_button"> Pause </label>
     </div>
-
-    <div id="tweet-container">
-    </div>
+  </div>
   </body>
 
 
