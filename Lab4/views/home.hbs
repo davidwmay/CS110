@@ -1,0 +1,18 @@
+<h1> Home </h1>
+<p>This is the {{ title }} page</p>
+{{#if isAvailable}}
+<ul>
+    {{#each rooms}}
+         <li> <a href={{this.name}}> {{this.name}}  </a></li>
+    {{/each}}
+</ul>
+{{/if}}
+
+<form action="/create" method="POST">
+<input type="text" name="roomName" placeholder="enter room name"/>
+<input type="submit" value="create room"/> 
+</form>
+
+{{!-- <script>
+    fetch("http://localhost:8080/getRoom").then()
+</script> --}}
