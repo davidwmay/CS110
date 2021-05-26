@@ -7,6 +7,9 @@
 .DS_Store
 .AppleDouble
 .LSOverride
+../npm
+../package-lock.json
+../package.json
 
 # Icon must end with two \r
 Icon
