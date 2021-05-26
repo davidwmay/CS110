@@ -53,10 +53,13 @@ app.get("/getroom", function(req, res){
 
 })
 app.post('/sendChat', function(req, res) {
-    console.log("send button received")
-    console.log(req.body.chatMessage)
+    var newDate = new Date();
+    var date = newDate.getFullYear()+'-'+(newDate.getMonth()+1)+'-'+newDate.getDate();
+    var time = newDate.getHours() + ":" + newDate.getMinutes() + ":" + newDate.getSeconds();
+    var dateTime = date+' '+time;
     const newChat = new Chat({
         message: req.body.chatMessage,
+        timestamp: dateTime,
     })
     newChat.save().then(console.log("chat stored"))
     .catch(e => console.log(e))
