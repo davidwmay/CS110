@@ -7,24 +7,53 @@
 <form></form>
 
 <form action="/sendChat" method="POST">
-    <input type="text" name="userName" placeholder="Enter username here"/>
     <input type="text" name="chatMessage" placeholder="Send a message!"/>
     <input type="submit" id="sendButton" value="Send"/> 
+    <input type="hidden" name="roomName" id="roomName" value={{roomName}}/> 
+    <input type="hidden" name="username" id="user" value=""/>
 </form> 
- <script>
-      while(true) {
-        var nickname = prompt("Enter your nickname")
 
-        if (nickname && !(nickname.trim() === "") ) {
-            document.getElementByName("userName").value = nickname;
-            break
+<div id="message-container">
+        {{!-- {{#if isAvailable}} --}}
+        <ul id="messageList" class="messageList">
+            {{!-- {{#each messages}} --}}
+                <li id={{this._id}}> 
+                    <ul>
+                        <li class="chatMessage"><h1>{{this.username}}</h1><p>: {{this.chatMessage}}</p></li>
+                    </ul>
+                </li>
+            {{!-- {{/each}} --}}
+        </ul>
+        {{!-- {{/if}} --}}
+    </div>
+</div>
+
+</form>
+
+<script>
+    while (true) {
+        var user = prompt("Enter a nickname")
+        if (user && !(user.trim() === "")) {
+            document.getElementById("user").value = user;
+            //console.log(document.getElementById("user").value)
+            break;
         } else {
-            alert('Please enter a nickname')
+            alert('Enter a nickname');
         }
     }
 
-
-
-    //create text message 
-    //refresh chatlog
-</script>
+    var room = document.getElementById("roomName");
+    interval = window.setInterval(function() {
+        fetch(`http://localhost:8080/pullMessages`).then(function(elements) {
+            elements.json().then((jsonResponse) => {
+                for (let i = 0; i < jsonResponse.length; ++i) {
+                    console.log(jsonResponse[i].room)
+                    console.log(room.value)
+                    if (jsonResponse[i].room === room.value) {
+                        console.log(jsonResponse[i]);
+                    }
+                }
+            })
+        })
+    }, 10000);
+</script> 

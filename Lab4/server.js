@@ -52,17 +52,22 @@ app.get("/getRoom", function(req, res){
         res.json(items)
     })
 })
+app.get('/pullMessages', function(req, res) {
+    Chat.find().lean().then(items => {
+        res.json(items)
+    })
+});
 
 app.post('/sendChat', function(req, res) {
-    console.log(req.body.userName)
     var newDate = new Date();
     var date = newDate.getFullYear()+'-'+(newDate.getMonth()+1)+'-'+newDate.getDate();
     var time = newDate.getHours() + ":" + newDate.getMinutes() + ":" + newDate.getSeconds();
     var dateTime = date+' '+time;
     const newChat = new Chat({
-        nickname: req.body.userName,
         message: req.body.chatMessage,
         timestamp: dateTime,
+        room: req.body.roomName,
+        user: req.body.username,
     })
     newChat.save().then(console.log("chat stored"))
     .catch(e => console.log(e))
