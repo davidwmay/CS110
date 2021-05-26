@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const config = require('config');
 const path = require('path');
 const Room = require('./models/Rooms');
+const Chat = require('./models/Chats')
 
 // import handlers
 const homeHandler = require('./controllers/home.js');
@@ -50,6 +51,15 @@ app.get("/getroom", function(req, res){
         res.json(items)
     })
 
+})
+app.post('/sendChat', function(req, res) {
+    console.log("send button received")
+    console.log(req.body.chatMessage)
+    const newChat = new Chat({
+        message: req.body.chatMessage,
+    })
+    newChat.save().then(console.log("chat stored"))
+    .catch(e => console.log(e))
 })
 app.get('/', homeHandler.getHome);
 app.get('/:roomName', roomHandler.getRoom);

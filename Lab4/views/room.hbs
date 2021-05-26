@@ -4,3 +4,11 @@
     The room you are visiting is {{ roomName }}
 </p>
 <p>To generate a new room, here is the room id: {{ newRoomId }}</p>
+
+<form></form>
+
+
+<form action="/sendChat" method="POST">
+<input type="text" name="chatMessage" placeholder="Send a message!"/>
+<input type="submit" id="sendButton" value="Send"/> 
+</form>
