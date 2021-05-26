@@ -11,7 +11,7 @@
 <form action="/sendChat" method="POST">
 <input type="text" name="chatMessage" placeholder="Send a message!"/>
 <input type="submit" id="sendButton" value="Send"/> 
-<input type="hidden" name="roomName" value={{roomName}}/> 
+<input type="hidden" name="roomName" id="roomName" value={{roomName}}/> 
 <input type="hidden" name="username" id="user" value=""/>
 </form>
 
@@ -20,17 +20,24 @@
         var user = prompt("Enter a nickname")
         if (user && !(user.trim() === "")) {
             document.getElementById("user").value = user;
-            console.log(document.getElementById("user").value)
+            //console.log(document.getElementById("user").value)
             break;
         } else {
             alert('Enter a nickname');
         }
     }
-
+    var room = document.getElementById("roomName");
     interval = window.setInterval(function() {
         fetch(`http://localhost:8080/pullMessages`).then(function(elements) {
             elements.json().then((jsonResponse) => {
-                console.log(jsonResponse)
+                for (let i = 0; i < jsonResponse.length; ++i) {
+                    //console.log(jsonResponse[i].room)
+                    //console.log(room.value)
+                    if (jsonResponse[i].room === room.value) {
+                        console.log(jsonResponse[i]);
+                    }
+                }
+                //console.log(jsonResponse)
             })
         })
     }, 10000);
