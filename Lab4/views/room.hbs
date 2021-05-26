@@ -1,6 +1,17 @@
-<h1> Room </h1>
-<p>This is a demo of chatroom page</p>
+<h1> Room: {{ roomName }} </h1>
 <p>
     The room you are visiting is {{ roomName }}
 </p>
 <p>To generate a new room, here is the room id: {{ newRoomId }}</p>
+
+ <script>
+      var person = prompt("Please enter your name", "Harry Potter");
+
+        if (person != null) {
+            document.getElementById("demo").innerHTML =
+            "Hello " + person + "! How are you today?";
+        }
+
+    //create text message 
+    //refresh chatlog
+</script>

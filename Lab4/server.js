@@ -45,11 +45,11 @@ app.post("/create", function(req, res){
     newRoom.save().then(console.log("room added"))
     .catch(e => console.log(e))
 })
-app.get("/getroom", function(req, res){
+
+app.get("/getRoom", function(req, res){
     Room.find().lean().then(items => {
         res.json(items)
     })
-
 })
 app.get('/', homeHandler.getHome);
 app.get('/:roomName', roomHandler.getRoom);

@@ -3,7 +3,7 @@
 {{#if isAvailable}}
 <ul>
     {{#each rooms}}
-         <li> <a href={{this.name}}> {{this.name}}  </a></li>
+         <li> <a href={{this.name}}> {{this.name}} </a></li>
     {{/each}}
 </ul>
 {{/if}}
@@ -13,6 +13,6 @@
 <input type="submit" value="create room"/> 
 </form>
 
-{{!-- <script>
+<script>
     fetch("http://localhost:8080/getRoom").then()
-</script> --}}
+</script>
