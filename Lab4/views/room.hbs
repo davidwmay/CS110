@@ -4,7 +4,7 @@
 </p>
 <p>To generate a new room, here is the room id: {{ newRoomId }}</p>
 
-<form></form>
+<form>
 
 <form action="/sendChat" method="POST">
     <input type="text" name="chatMessage" placeholder="Send a message!"/>
@@ -16,13 +16,13 @@
 <div id="message-container">
         {{!-- {{#if isAvailable}} --}}
         <ul id="messageList" class="messageList">
-            {{!-- {{#each messages}} --}}
-                <li id={{this._id}}> 
+            {{#each messages}}
+                {{!-- <li id={{this._id}}>  --}}
                     <ul>
-                        <li class="chatMessage"><h1>{{this.username}}</h1><p>: {{this.chatMessage}}</p></li>
+                        <li class="chatMessage"><h1>{{this.user}}</h1><h2>({{this.timestamp}})</h2><p>: {{this.message}}</p></li>
                     </ul>
-                </li>
-            {{!-- {{/each}} --}}
+                {{!-- </li> --}}
+            {{/each}}
         </ul>
         {{!-- {{/if}} --}}
     </div>
@@ -46,14 +46,34 @@
     interval = window.setInterval(function() {
         fetch(`http://localhost:8080/pullMessages`).then(function(elements) {
             elements.json().then((jsonResponse) => {
+
+                let messageList = document.getElementById('messageList')
+                let messageListChildren = messageList.children
+
+                console.log(messageList);
+
+
+
                 for (let i = 0; i < jsonResponse.length; ++i) {
-                    console.log(jsonResponse[i].room)
-                    console.log(room.value)
                     if (jsonResponse[i].room === room.value) {
-                        console.log(jsonResponse[i]);
+                        //console.log(jsonResponse[i])
+                        //console.log(jsonResponse[i].user)
+                        //console.log(jsonResponse[i].timestamp)
+                        //console.log(jsonResponse[i].message)
+                        let chatMessageInnerList = document.createElement('ul')
+                        let chatMessageBodyText = document.createElement('li')
+
+                        chatMessageBodyText.className = "chatMessage"
+                        chatMessageBodyText.innerHTML = `<h1>${jsonResponse[i].user}</h1> <h2>(${jsonResponse[i].timestamp})</h2><p>: ${jsonResponse[i].message}</p>`
+
+                        //console.log(chatMessageBodyText.innerHTML)
+
+                        messageList.appendChild(chatMessageBodyText)
+                        console.log(`new chat added to message list`)
                     }
                 }
+
             })
         })
-    }, 10000);
+    }, 3000);
 </script> 
