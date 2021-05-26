@@ -11,4 +11,19 @@
 <form action="/sendChat" method="POST">
 <input type="text" name="chatMessage" placeholder="Send a message!"/>
 <input type="submit" id="sendButton" value="Send"/> 
+<input type="hidden" name="roomName" value={{roomName}}/> 
+<input type="hidden" name="username" id="user" value=""/>
 </form>
+
+<script>
+    while (true) {
+        var user = prompt("Enter a nickname")
+        if (user && !(user.trim() === "")) {
+            document.getElementById("user").value = user;
+            console.log(document.getElementById("user").value)
+            break;
+        } else {
+            alert('Enter a nickname');
+        }
+    }
+</script>
