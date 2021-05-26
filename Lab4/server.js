@@ -50,8 +50,12 @@ app.get("/getroom", function(req, res){
     Room.find().lean().then(items => {
         res.json(items)
     })
-
 })
+app.get('/pullMessages', function(req, res) {
+    Chat.find().lean().then(items => {
+        res.json(items)
+    })
+});
 app.post('/sendChat', function(req, res) {
     console.log("send button received")
     console.log(req.body.chatMessage)
@@ -70,6 +74,7 @@ app.post('/sendChat', function(req, res) {
 })
 app.get('/', homeHandler.getHome);
 app.get('/:roomName', roomHandler.getRoom);
+
 
 // NOTE: This is the sample server.js code we provided, feel free to change the structures
 

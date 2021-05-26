@@ -10,8 +10,6 @@ function getRoom(request, response){
     response.render('room', {title: 'chatroom', roomName: request.params.roomName, newRoomId: roomGenerator.roomIdGenerator()});
 }
 
-
-
 module.exports = {
     getRoom
 };

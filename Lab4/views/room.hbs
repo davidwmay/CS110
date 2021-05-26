@@ -26,4 +26,12 @@
             alert('Enter a nickname');
         }
     }
+
+    interval = window.setInterval(function() {
+        fetch(`http://localhost:8080/pullMessages`).then(function(elements) {
+            elements.json().then((jsonResponse) => {
+                console.log(jsonResponse)
+            })
+        })
+    }, 10000);
 </script>
