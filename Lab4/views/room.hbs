@@ -4,13 +4,26 @@
 </p>
 <p>To generate a new room, here is the room id: {{ newRoomId }}</p>
 
- <script>
-      var person = prompt("Please enter your name", "Harry Potter");
+<form></form>
 
-        if (person != null) {
-            document.getElementById("demo").innerHTML =
-            "Hello " + person + "! How are you today?";
+<form action="/sendChat" method="POST">
+    <input type="text" name="userName" placeholder="Enter username here"/>
+    <input type="text" name="chatMessage" placeholder="Send a message!"/>
+    <input type="submit" id="sendButton" value="Send"/> 
+</form> 
+ <script>
+      while(true) {
+        var nickname = prompt("Enter your nickname")
+
+        if (nickname && !(nickname.trim() === "") ) {
+            document.getElementByName("userName").value = nickname;
+            break
+        } else {
+            alert('Please enter a nickname')
         }
+    }
+
+
 
     //create text message 
     //refresh chatlog
