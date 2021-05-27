@@ -57,8 +57,8 @@ app.get('/pullMessages', function(req, res) {
     })
 });
 app.post('/sendChat', function(req, res) {
-    console.log("send button received")
-    console.log(req.body.chatMessage)
+    // console.log("send button received")
+    // console.log(req.body.chatMessage)
     var newDate = new Date();
     var date = newDate.getFullYear()+'-'+(newDate.getMonth()+1)+'-'+newDate.getDate();
     var time = newDate.getHours() + ":" + newDate.getMinutes() + ":" + newDate.getSeconds();

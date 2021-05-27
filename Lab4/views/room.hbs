@@ -5,8 +5,6 @@
 </p>
 <p>To generate a new room, here is the room id: {{ newRoomId }}</p>
 
-<form></form>
-
 
 <form action="/sendChat" method="POST">
 <input type="text" name="chatMessage" placeholder="Send a message!"/>
@@ -15,12 +13,26 @@
 <input type="hidden" name="username" id="user" value=""/>
 </form>
 
+<form>
+<div id="message-container">
+        <ul id="messageList" class="messageList">
+            <li id={{this._id}}> 
+            {{#each messages}}
+                    <ul>
+                        <li class="chatMessage"><h1>{{this.username}}</h1><p>: {{this.chatMessage}}</p></li>
+                        <li class="chatMessage"><h1>{{this.user}}</h1><h2>({{this.timestamp}})</h2><p>: {{this.message}}</p></li>
+                    </ul>
+                </li>
+            {{/each}}
+        </ul>
+</div>
+</form>
+
 <script>
     while (true) {
         var user = prompt("Enter a nickname")
         if (user && !(user.trim() === "")) {
             document.getElementById("user").value = user;
-            //console.log(document.getElementById("user").value)
             break;
         } else {
             alert('Enter a nickname');
@@ -30,15 +42,29 @@
     interval = window.setInterval(function() {
         fetch(`http://localhost:8080/pullMessages`).then(function(elements) {
             elements.json().then((jsonResponse) => {
+
+                let messageList = document.getElementById('messageList')
+                let messageListChildren = messageList.children
+                let childArray = Array.from(messageListChildren)
+
                 for (let i = 0; i < jsonResponse.length; ++i) {
-                    //console.log(jsonResponse[i].room)
-                    //console.log(room.value)
+                    let newMessage = true
                     if (jsonResponse[i].room === room.value) {
-                        console.log(jsonResponse[i]);
+                        let chatMessageInnerList = document.createElement('ul')
+                        let chatMessageBodyText = document.createElement('li')
+                        chatMessageBodyText.className = "chatMessage"
+                        chatMessageBodyText.innerHTML = `<h1>${jsonResponse[i].user}</h1> <h2>(${jsonResponse[i].timestamp})</h2><p>: ${jsonResponse[i].message}</p>`
+                        for (let j = 0; j < messageListChildren.length; j++) {
+                            if (messageListChildren[j].innerHTML === chatMessageBodyText.innerHTML) {
+                                newMessage = false
+                            }
+                        }
+                        if (newMessage) {
+                            messageList.appendChild(chatMessageBodyText)
+                        }
                     }
                 }
-                //console.log(jsonResponse)
             })
         })
-    }, 10000);
+    }, 500);
 </script>
