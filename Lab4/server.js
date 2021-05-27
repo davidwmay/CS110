@@ -15,6 +15,9 @@ const roomHandler = require('./controllers/room.js');
 const app = express();
 const port = 8080;
 
+const roomGenerator = require('./util/roomIdGenerator.js');
+
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
@@ -41,7 +44,8 @@ app.set('view engine', 'hbs');
 // Create controller handlers to handle requests at each endpoint
 app.post("/create", function(req, res){
     const newRoom = new Room({
-        name: req.body.roomName
+        name: req.body.roomName,
+        id: roomGenerator.roomIdGenerator()
     })
     newRoom.save().then(console.log("room added"))
     .catch(e => console.log(e))

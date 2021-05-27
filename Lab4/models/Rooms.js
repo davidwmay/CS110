@@ -5,5 +5,9 @@ const RoomSchema = new Schema({
     type: String,
     required: true
   },
+  id: {
+    type: String,
+    required: true
+  }
 });
 module.exports = Item = mongoose.model('room', RoomSchema);
