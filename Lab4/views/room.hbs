@@ -3,13 +3,13 @@
 <p>
     The room you are visiting is {{ roomName }}
 </p>
-<p>To generate a new room, here is the room id {{ ident }}</p>
+<p>To generate a new room, here is the room id {{ id }}</p>
 
 <form action="/sendChat" method="POST">
 <input type="text" name="chatMessage" placeholder="Send a message!"/>
 <input type="submit" id="sendButton" value="Send"/> 
 <input type="hidden" name="roomName" id="roomName" value={{roomName}}/> 
-{{!-- <input type="hidden" name="id" id="id" value={{id}}/> --}}
+<input type="hidden" name="id" id="id" value={{id}}/>
 <input type="hidden" name="username" id="user" value=""/>
 </form>
 
@@ -41,7 +41,7 @@
 
     var room = document.getElementById("roomName");
 
-    //var roomID = document.getElementById("id").value;
+    var roomID = document.getElementById("id").value;
     //console.log(roomID);
     interval = window.setInterval(function() {
         fetch(`http://localhost:8080/pullMessages`).then(function(elements) {
@@ -53,7 +53,7 @@
 
                 for (let i = 0; i < jsonResponse.length; ++i) {
                     let newMessage = true
-                    if (jsonResponse[i].id === room.value) {
+                    if (jsonResponse[i].room === roomID) {
                         let chatMessageInnerList = document.createElement('ul')
                         let chatMessageBodyText = document.createElement('li')
                         chatMessageBodyText.className = "chatMessage"

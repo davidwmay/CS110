@@ -5,7 +5,7 @@ const RoomSchema = new Schema({
     type: String,
     required: true
   },
-  id: {
+  identifier: {
     type: String,
     required: true
   }

@@ -45,7 +45,7 @@ app.set('view engine', 'hbs');
 app.post("/create", function(req, res){
     const newRoom = new Room({
         name: req.body.roomName,
-        id: roomGenerator.roomIdGenerator()
+        identifier: roomGenerator.roomIdGenerator()
     })
     newRoom.save().then(console.log("room added"))
     .catch(e => console.log(e))
@@ -70,14 +70,14 @@ app.post('/sendChat', function(req, res) {
     const newChat = new Chat({
         message: req.body.chatMessage,
         timestamp: dateTime,
-        room: req.body.roomName,
+        room: req.body.id,
         user: req.body.username,
     })
     newChat.save().then(console.log("chat stored"))
     .catch(e => console.log(e))
 })
 app.get('/', homeHandler.getHome);
-app.get('/:roomName', roomHandler.getRoom);
+app.get('/:id/:roomName', roomHandler.getRoom);
 
 
 // NOTE: This is the sample server.js code we provided, feel free to change the structures

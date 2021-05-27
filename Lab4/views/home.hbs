@@ -3,7 +3,7 @@
 {{#if isAvailable}}
 <ul>
     {{#each rooms}}
-         <li> <a href={{this.name}}> {{this.name}} ({{this.id}}) </a></li>
+         <li> <a href={{this.identifier}}/{{this.name}}> {{this.name}} ({{this.identifier}}) </a></li>
     {{/each}}
 </ul>
 {{/if}}
